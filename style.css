@@ -10,8 +10,32 @@ body {
 .playground {
     background-color: green;
     height: 70vh;
-    width: 100%;
+    width: 70%;
+    display: flex;
+    margin: 0 auto;
 }
+
+.playground .box {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.playground #player {
+    background-color: yellow;
+}
+
+.playground #computer {
+    background-color: aqua;
+}
+
+
+/* .playground .name {
+    
+} */
 
 .choice {
     background-color: red;

@@ -6,57 +6,31 @@ function getComputerChoice(){
     
     switch (randNum){
         case 0:
-            return "Rock";
+            return "rock";
         case 1:
-            return "Paper";
+            return "paper";
         case 2:
-            return "Scissors";
+            return "scissors";
     }
 }
 
-function getPlayerChoice(){
-    let userChoice = prompt("Enter your choice:\n1 or r for Rock\n2 or p for Paper\n3 or s for Scissors");
+// function draw(){
+    
+// }
 
-    if (userChoice === null){
-        return "Rock";
-    }
-
-    userChoice = userChoice.trim().toLowerCase();
-
-    switch (userChoice){
-        case "1":
-        case "r":
-        case "rock":
-            return "Rock";
-        case "2":    
-        case "p":
-        case "paper":
-            return "Paper";
-        case "3":            
-        case "s":
-        case "scissors":
-            return "Scissors";
-        default:
-            alert("Invalid Input! Enter again");
-            return getPlayerChoice();     
-    }
+function updateScore(winner){
+    const scoreElement = document.getElementById(`${winner}-score`);
+    scoreElement.innerText = (winner === "player") ? playerScore : computerScore;
 }
 
-function draw(playerChoice){
-    console.log(`You both chose ${playerChoice}`);
-    console.log("DRAW!");
-}
-
-function playerWins(playerChoice, computerChoice){
-    console.log(`${playerChoice} Beats ${computerChoice}`);
-    console.log("PLAYER WINS!");
+function playerWins(){
     playerScore++;
+    updateScore("player");
 }
 
-function computerWins(playerChoice, computerChoice){
-    console.log(`${computerChoice} Beats ${playerChoice}`);
-    console.log("COMPUTER WINS!");
+function computerWins(){
     computerScore++;
+    updateScore("computer")
 }
 
 function playRound(playerChoice, computerChoice){
@@ -64,49 +38,44 @@ function playRound(playerChoice, computerChoice){
     if(playerChoice === computerChoice){
         draw(playerChoice);
     }
-    else if (playerChoice === "Rock"){
-        if(computerChoice === "Scissors"){
-            playerWins(playerChoice, computerChoice);
+    else if (playerChoice === "rock"){
+        if(computerChoice === "scissors"){
+            playerWins();
         }
         else{
-            computerWins(playerChoice, computerChoice);
+            computerWins();
         }
     }
-    else if(playerChoice === "Paper"){
-        if(computerChoice === "Rock"){
-            playerWins(playerChoice, computerChoice);
-        }
-        else{
-            computerWins(playerChoice, computerChoice);
-        }
-    }
-    else if(playerChoice === "Scissors"){
-        if(computerChoice === "Paper"){
-            playerWins(playerChoice, computerChoice);
+    else if(playerChoice === "paper"){
+        if(computerChoice === "rock"){
+            playerWins();
         }
         else{
-            computerWins(playerChoice, computerChoice);
+            computerWins();
         }
     }
-
-    console.log(`Player: ${playerScore}    Computer: ${computerScore}`)
-}
-
-function playGame(){
-    playerScore = 0;
-    computerScore = 0;
-    for(let i = 1; i <= 5; i++){
-        playRound(getPlayerChoice(), getComputerChoice());
-    }
-    if(playerScore === computerScore){
-        console.log("GAME DRAW!!!");
-    }
-    else if(playerScore > computerScore){
-        console.log("PLAYER WINS THE GAME!!!");
-    }
-    else{
-        console.log("COMPUTER WINS THE GAME!!!");
+    else if(playerChoice === "scissors"){
+        if(computerChoice === "paper"){
+            playerWins();
+        }
+        else{
+            computerWins();
+        }
     }
 }
 
-// playGame();
+
+const rockBtn = document.getElementById("rock-btn");
+rockBtn.addEventListener("click", ()=> {
+    playRound("rock", getComputerChoice())
+});
+
+const paperBtn = document.getElementById("paper-btn");
+paperBtn.addEventListener("click", ()=> {
+    playRound("paper", getComputerChoice())
+});
+
+const scissorsBtn = document.getElementById("scissors-btn");
+scissorsBtn.addEventListener("click", ()=> {
+    playRound("scissors", getComputerChoice())
+});
