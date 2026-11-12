@@ -6,3 +6,27 @@ body {
     margin: 0;
     padding: 0;
 }
+
+.playground {
+    background-color: green;
+    height: 70vh;
+    width: 100%;
+}
+
+.choice {
+    background-color: red;
+    height: 30vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(15px, 5vw, 50px);
+}
+
+.choice button {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    border: 2px solid green;
+}
+
